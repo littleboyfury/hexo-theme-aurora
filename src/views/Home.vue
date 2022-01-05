@@ -199,6 +199,12 @@ export default defineComponent({
       posts.value = new PostList()
       await postStore.fetchPostsList(pagination.value.page).then(() => {
         posts.value = postStore.posts
+        const featureData = posts.value.data.filter(v => v.feature)
+          .sort((x, y) => new Date(y.updated).getTime() - new Date(x.updated).getTime())
+        const unFeatureData = posts.value.data.filter(v => !v.feature)
+          .sort((x, y) => new Date(y.updated).getTime() - new Date(x.updated).getTime())
+        posts.value.data = [...featureData, ...unFeatureData]
+
         pagination.value.pageTotal = postStore.posts.total
         pagination.value.pageSize = postStore.posts.pageSize
       })

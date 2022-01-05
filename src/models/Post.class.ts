@@ -50,6 +50,11 @@ export class Post {
     day: 0,
     year: 0
   }
+  updated_time: { month: string; day: number; year: number } = {
+    month: '',
+    day: 0,
+    year: 0,
+  }
   updated = ''
   comments = false
   path = ''
@@ -103,23 +108,32 @@ export class Post {
             })
           } else {
             if (key === 'date') {
-              const m = new Date(raw[key] as string)
-
-              const translateMonth = `settings.months[${m.getMonth()}]`
-
-              raw[key] = Object.create({
-                month: translateMonth,
-                day: m.getUTCDate(),
-                year: m.getUTCFullYear()
-              })
+              raw[key] = generateTime(raw[key] as string)
             }
-
+            if (key === 'updated') {
+              const updatedKey = `${key}_time`
+              raw[updatedKey] = generateTime(raw[key] as string)
+              Object.assign(this, { [updatedKey]: raw[updatedKey] })
+            }
             Object.assign(this, { [key]: raw[key] })
           }
         }
       }
     }
   }
+}
+
+function generateTime(time: string) {
+  const m = new Date(time)
+
+  const translateMonth = `settings.months[${m.getMonth()}]`
+
+  return Object.create({
+    month: translateMonth,
+    day: m.getUTCDate(),
+    year: m.getUTCFullYear()
+  })
+
 }
 
 export class PostList {
