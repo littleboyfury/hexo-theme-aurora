@@ -36,8 +36,8 @@
           >
             <div class="timeline-info">
               <span>
-                {{ t(post.updated_time.month) }} {{ post.updated_time.day }},
-                {{ post.updated_time.year }}
+                {{ t(post.date.month) }} {{ post.date.day }},
+                {{ post.date.year }}
               </span>
             </div>
             <div class="timeline-marker"></div>
