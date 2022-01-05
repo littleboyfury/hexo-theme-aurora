@@ -6,6 +6,7 @@ export class NavPost {
   slug = ''
   date = ''
   updated = ''
+  updated_time = ''
   comments = ''
   path = ''
   keywords = ''
@@ -23,15 +24,13 @@ export class NavPost {
       for (const key of Object.keys(this)) {
         if (Object.prototype.hasOwnProperty.call(raw, key)) {
           if (key === 'date') {
-            const m = new Date(raw[key] as string)
+            raw[key] = generateTime(raw[key] as string)
+          }
 
-            const translateMonth = `settings.months[${m.getMonth()}]`
-
-            raw[key] = Object.create({
-              month: translateMonth,
-              day: m.getUTCDate(),
-              year: m.getUTCFullYear()
-            })
+          if (key === 'updated') {
+            const updatedKey = `${key}_time`
+            raw[updatedKey] = generateTime(raw[key] as string)
+            Object.assign(this, { [updatedKey]: raw[updatedKey] })
           }
 
           Object.assign(this, { [key]: raw[key] })
@@ -53,7 +52,7 @@ export class Post {
   updated_time: { month: string; day: number; year: number } = {
     month: '',
     day: 0,
-    year: 0,
+    year: 0
   }
   updated = ''
   comments = false
@@ -133,7 +132,6 @@ function generateTime(time: string) {
     day: m.getUTCDate(),
     year: m.getUTCFullYear()
   })
-
 }
 
 export class PostList {
