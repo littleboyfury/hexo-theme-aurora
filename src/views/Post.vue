@@ -65,8 +65,8 @@
                 {{ post.author.name }}
               </strong>
               <span class="opacity-70">
-                {{ t('settings.updated-on') }} {{ t(post.updated_time.month) }}
-                {{ post.updated_time.day }}, {{ post.updated_time.year }}
+                {{ t('settings.shared-on') }} {{ t(post.date.month) }}
+                {{ post.date.day }}, {{ post.date.year }}
               </span>
             </span>
           </div>
