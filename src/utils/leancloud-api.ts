@@ -11,6 +11,7 @@
 // import { AxiosResponse } from 'axios'
 import { formatTime, filterHTMLContent } from '@/utils'
 import pack from '../../package.json'
+import AV from 'leancloud-storage'
 
 const VERSION = pack.version
 let AV_INITIALIZED = false
@@ -20,7 +21,8 @@ let AV_INITIALIZED = false
  *
  * For version 4.10.1
  */
-declare const AV: any
+// declare const AV: any
+// const AV = ('leancloud-storage/dist/av-min.js')
 
 /**
  * js-md5 package is imported through CDN.

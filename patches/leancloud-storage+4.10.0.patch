@@ -1,0 +1,14 @@
+diff --git a/node_modules/leancloud-storage/dist/av.js b/node_modules/leancloud-storage/dist/av.js
+index eb6f03d..c12a006 100644
+--- a/node_modules/leancloud-storage/dist/av.js
++++ b/node_modules/leancloud-storage/dist/av.js
+@@ -6563,6 +6563,9 @@ var defineConfig = function defineConfig(property) {
+ __webpack_require__(117);
+ var $Object = __webpack_require__(1).Object;
+ module.exports = function defineProperty(it, key, desc) {
++  if (key in it) {
++    return it
++  }
+   return $Object.defineProperty(it, key, desc);
+ };
+ 
